@@ -1,0 +1,6 @@
+- `useSearchParams` hook for working with query string params, `AuthForm.js`
+- Retrieve the **token** received from the backend and store it in `localStorage` in `Authentication.js`
+- Use the token in `EventForm.js` and `EventDetail.js`
+- Remove the token in `Logout.js`
+- Use the token to conditionally render components in `MainNavigation.js`, `EventsNavigation.js` and `EventItem.js`
+- add `checkAuthLoader` in auth.js to avoid no logged users to visit /events/new
