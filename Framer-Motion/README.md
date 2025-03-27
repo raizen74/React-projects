@@ -1,0 +1,9 @@
+- `npm install framer-motion`
+- In Vite projects you need to use **.jsx extension, .js is not valid**
+- Animate the `ChallengeItem.jsx icon` ln 47 with CSS transition for the transform property -> `index.css ln 283`
+- Replaced this transition with `framer-motion`.
+- Conditionally render the modal in `Header.jsx`
+- Custom CSS animation for the modal -> `keyframe slide-up-fade-in` in `ln 321`
+- Replaced with `framer-motion` with initial prop
+- Add modal disappearing animation with `AnimatePresence` in `Header.jsx` and the `exit` prop.
+- Animate the `Header.jsx` button with `framer-motion`.
