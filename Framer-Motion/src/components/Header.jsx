@@ -25,7 +25,7 @@ export default function Header() {
         <motion.button
           // onHoverStart={}
           // onHoverEnd={}
-          whileHover={{ scale: 1.1 }}
+          whileHover={{ scale: 1.1, backgroundColor: '#8b11f0' }}
           transition={{type: 'spring', stiffness: 500, mass: 0.2}}
           onClick={handleStartAddNewChallenge}
           className='button'

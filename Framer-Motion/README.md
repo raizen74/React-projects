@@ -7,3 +7,9 @@
 - Replaced with `framer-motion` with initial prop
 - Add modal disappearing animation with `AnimatePresence` in `Header.jsx` and the `exit` prop.
 - Animate the `Header.jsx` button with `framer-motion`.
+- Animate the delay in appearing list items in `NewChallenge.jsx` and keyframes list.
+- `useAnimate` hook in `NewChallenge.jsx` for trigger an animation imperatively
+- `layout` animation in `ChallengeItem.jsx` to animate the item when it moves in the list, animate how an item disappears from the list with `AnimatePresence` in `Challenges.jsx`
+- Animate the `ChallengeTabs.jsx` to move the tab smoothly
+- Animate the badges in `Badge.jsx` to bump when the number changes
+- `useScroll` hook for listen to scroll events, `useTransform` hook to transform values to values that can be used in animations -> `Welcome.jsx`, used in the opacity of the city image.

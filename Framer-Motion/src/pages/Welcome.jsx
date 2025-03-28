@@ -1,26 +1,54 @@
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
+import { motion, useScroll, useTransform } from "framer-motion";
 
-import cityImg from '../assets/city.jpg';
-import heroImg from '../assets/hero.png';
+import cityImg from "../assets/city.jpg";
+import heroImg from "../assets/hero.png";
 
 export default function WelcomePage() {
+  const { scrollY } = useScroll(); // scrollY is the number of pixels the user scroll
+
+  const yCity = useTransform(scrollY, [0, 200], [0, -100]); // the city moves 100px up
+  const opacityCity = useTransform(
+    scrollY,
+    [0, 200, 300, 500], // breakpoints
+    [1, 0.5, 0.5, 0] // opacity values
+  ); // valor 1 inicialment i 0.5 quan sha fet scroll 200px
+  const yHero = useTransform(scrollY, [0, 200], [0, -150]);
+  const opacityHero = useTransform(
+    scrollY,
+    [0, 300, 500], // breakpoints
+    [1, 1, 0] // relative values
+  ); // valor 1 inicialment i 0.5 quan sha fet scroll 200px
+  const yText = useTransform(scrollY, [0, 200, 300, 500], [0, 50, 50, 300]);
+  const scaleText = useTransform(scrollY, [0, 300], [1, 1.5]);
+
   return (
     <>
-      <header id="welcome-header">
-        <div id="welcome-header-content">
+      <header id='welcome-header'>
+        <motion.div
+          id='welcome-header-content'
+          style={{ scale: scaleText, y: yText }}
+        >
           <h1>Ready for a challenge?</h1>
-          <Link id="cta-link" to="/challenges">
+          <Link id='cta-link' to='/challenges'>
             Get Started
           </Link>
-        </div>
-        <img
+        </motion.div>
+        <motion.img
+          style={{ opacity: opacityCity, y: yCity }} // prop supported by img
+          // animate= {{opacity: 1}}
           src={cityImg}
-          alt="A city skyline touched by sunlight"
-          id="city-image"
+          alt='A city skyline touched by sunlight'
+          id='city-image'
         />
-        <img src={heroImg} alt="A superhero wearing a cape" id="hero-image" />
+        <motion.img
+          style={{ opacity: opacityHero, y: yHero }}
+          src={heroImg}
+          alt='A superhero wearing a cape'
+          id='hero-image'
+        />
       </header>
-      <main id="welcome-content">
+      <main id='welcome-content'>
         <section>
           <h2>There&apos;s never been a better time.</h2>
           <p>
