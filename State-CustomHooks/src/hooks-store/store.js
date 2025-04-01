@@ -5,11 +5,11 @@ let globalState = {};
 let listeners = [];
 let actions = {};
 
-export const useStore = () => {
+export const useStore = (shouldListen = true) => {
   const setState = useState(globalState)[1]; // binded to the function
 
-  const dispatch = (actionIdentifier) => {
-    const newState = actions[actionIdentifier](globalState);
+  const dispatch = (actionIdentifier, payload) => {
+    const newState = actions[actionIdentifier](globalState, payload);
     globalState = { ...globalState, ...newState };
 
     // propagate state update to all listeners
@@ -19,11 +19,15 @@ export const useStore = () => {
   };
 
   useEffect(() => {
-    listeners.push(setState); // register a listener for the component
+    if (shouldListen) {
+      listeners.push(setState); // register a listener for the component
+    }
     return () => {
-      listeners = listeners.filter((li) => li !== setState); // remove the listener when the component unmounts
+      if (shouldListen) {
+        listeners = listeners.filter((li) => li !== setState); // remove the listener when the component unmounts
+      }
     };
-  }, [setState]); // useEffect will only run once for the component that uses this useStore custom hook.
+  }, [setState, shouldListen]); // useEffect will only run once for the component that uses this useStore custom hook.
   // react guarantees that setState never changes for a component, so it should be a dependency.
 
   return [globalState, dispatch];
@@ -31,7 +35,7 @@ export const useStore = () => {
 
 export const initStore = (userActions, initialState) => {
   if (initialState) {
-    globalState = {...globalState, ...initialState};
+    globalState = { ...globalState, ...initialState };
   }
-  actions = {...actions, ...userActions};
+  actions = { ...actions, ...userActions };
 };
